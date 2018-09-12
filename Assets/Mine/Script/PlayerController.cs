@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour {
     public float tilt;
     public DontGoOut dontGoOut;
 
+
     void FixedUpdate() {
         float HorizontalMovement = Input.GetAxis("Horizontal");
         float VerticalMovement = Input.GetAxis("Vertical");
@@ -28,5 +29,7 @@ public class PlayerController : MonoBehaviour {
             Mathf.Clamp(PlayerRb.position.z, dontGoOut.zMin, dontGoOut.zMax)
        );
         PlayerRb.rotation = Quaternion.Euler(0f, 0f, PlayerRb.velocity.x*-tilt);
-	}
+
+        
+    }
 }

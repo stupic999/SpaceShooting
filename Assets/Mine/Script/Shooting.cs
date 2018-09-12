@@ -9,13 +9,28 @@ public class Shooting : MonoBehaviour {
     public float FireTime = 0.2f;
 	
 	void Update () {
-        if (Input.GetButton("Fire1") && FireTime >= 0.2f || Input.GetButton("Fire2") && FireTime >= 0.2f) 
+        if (WeopenType.weopen == "")
         {
-            Instantiate(Bullet, PlayerShot.position, PlayerShot.rotation);
-            FireTime = 0;
-            GetComponent<AudioSource>().Play();
+            if (Input.GetButton("Fire1") && FireTime >= 0.2f || Input.GetButton("Fire2") && FireTime >= 0.2f)
+            {
+                Instantiate(Bullet, PlayerShot.position, PlayerShot.rotation);
+                FireTime = 0;
+                GetComponent<AudioSource>().Play();
+            }
+            if (FireTime < 0.2f)
+                FireTime += Time.deltaTime;
         }
-        if (FireTime < 0.2f)
-            FireTime += Time.deltaTime;
+        else
+        {
+            if (Input.GetButton("Fire1") && FireTime >= 0.05f || Input.GetButton("Fire2") && FireTime >= 0.05f)
+            {
+                Instantiate(Bullet, PlayerShot.position, PlayerShot.rotation);
+                FireTime = 0;
+                GetComponent<AudioSource>().Play();
+                WeopenType.bullet--;
+            }
+            if (FireTime < 0.05f)
+                FireTime += Time.deltaTime;
+        }
 	}
 }
