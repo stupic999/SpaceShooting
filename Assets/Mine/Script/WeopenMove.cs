@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeopenDrop : MonoBehaviour {
+public class WeopenMove : MonoBehaviour {
 
     int offsetx;
     float x1;
@@ -10,8 +10,11 @@ public class WeopenDrop : MonoBehaviour {
     int offsetz;
     public GameObject voice;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
+        Destroy(gameObject, 7);
+        voice = GameObject.FindWithTag("voice");
         offsetx = UnityEngine.Random.Range(0, 2);
         offsetz = UnityEngine.Random.Range(0, 2);
         if (offsetx == 0)
@@ -31,9 +34,10 @@ public class WeopenDrop : MonoBehaviour {
             z1 = 0.1f;
         }
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         if (transform.position.x <= -6)
         {
             x1 = 0.05f;
@@ -50,8 +54,8 @@ public class WeopenDrop : MonoBehaviour {
         {
             z1 = 0.1f;
         }
-        transform.position = new Vector3(transform.position.x+x1,transform.position.y,transform.position.z+z1);
-	}
+        transform.position = new Vector3(transform.position.x + x1, transform.position.y, transform.position.z + z1);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -60,7 +64,14 @@ public class WeopenDrop : MonoBehaviour {
             Destroy(gameObject);
             voice.GetComponent<AudioSource>().Play();
             WeopenType.weopen = "Heavy Machince Gun";
-            WeopenType.bullet = 200;
+            if (WeopenType.bullet <= 0)
+            {
+                WeopenType.bullet = 200;
+            }
+            else
+            {
+                WeopenType.bullet += 200;
+            }
         }
     }
 }

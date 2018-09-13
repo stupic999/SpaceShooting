@@ -11,7 +11,7 @@ public class WeopenType : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        bullet = 0;
 	}
 	
 	// Update is called once per frame
@@ -23,11 +23,12 @@ public class WeopenType : MonoBehaviour {
         }
         else if (weopen == "Heavy Machince Gun")
         {
-            weopenWord.text = bullet+"/200";
+            weopenWord.text = bullet.ToString();
         }
         if (bullet <= 0)
         {
             weopen = "";
+            weopenWord.text = "∞";
         }
     }
 }

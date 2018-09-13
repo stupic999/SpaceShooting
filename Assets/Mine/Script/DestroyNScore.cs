@@ -7,6 +7,7 @@ public class DestroyNScore : MonoBehaviour {
     public GameObject Explosion;
     public GameObject PlayerExplosion;
     public int score;
+    public GameObject HGun;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +25,11 @@ public class DestroyNScore : MonoBehaviour {
             Destroy(other.gameObject);
             Destroy(gameObject);
             ScoreCount.score += score;
+            int rand= UnityEngine.Random.Range(1, 50);
+            if (rand == 25)
+            {
+                Instantiate<GameObject>(HGun);
+            }
         }
         else if (other.tag == ("Destroyer") || (other.tag==("Enemy")))
         {
